@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica de js con Threejs</title>
+</head>
+<body>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type = "module">
+        import * as THREE from './three.module.js';
+        import {OrbitControls} from './OrbitControls.js';
+        let orbit, scene, camera, renderer;
+        //creando la escena
+        scene = new THREE.Scene();
+        
+        //scene.background = new THREE.Color(0x07661A);
+        scene.fog = new THREE.Fog(0xFF8000, 0.1, 8);
+
+        var loader = new THREE.TextureLoader();
+        loader.load('./Imagen de fondo (ACZ).jpg', function(texture){
+            scene.background = texture;
+        });
+
+
+        //cámara
+        camera = new THREE.PerspectiveCamera(
+            75,
+            window.innerWidth/window.innerHeight,
+            0.01,
+            30000
+        );
+        camera.position.set(1, 1, 1);
+
+        /*
+        var newCamera = new THREE.OrthographicCamera(5, -5, 5, -5, 3, 10);
+
+        var helper = new THREE.CameraHelper(newCamera);
+        scene.add(helper);
+        */
+
+        //renderer
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);//tamaño del marco del renderer
+        document.body.appendChild(renderer.domElement);//agregando el renderer al html
+        
+        orbit = new OrbitControls(camera, renderer.domElement);
+        /*
+        const loader2 = new THREE.TextureLoader()
+        loader2.load('./F15smtd.jpg', (texture2)=>{
+            material.map = texture2
+            
+        })*/
+
+        //creando cuerpos en 3D
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const geometry2 = new THREE.BoxGeometry(4, 4, 4);
+        const geometry3 = new THREE.BoxGeometry(5, 5, 5);
+        const geometry4 = new THREE.BoxGeometry(2, 2, 2);
+        const geometry5 = new THREE.BoxGeometry(3, 3, 3);
+        const geometry6 = new THREE.BoxGeometry(2.3, 2.3, 2.3);
+        //estableciendo los materiales
+        var material = new THREE.MeshBasicMaterial();
+        var material2 = new THREE.MeshBasicMaterial();
+        var material3 = new THREE.MeshBasicMaterial();
+        var material4 = new THREE.MeshBasicMaterial();
+        var material5 = new THREE.MeshBasicMaterial();
+        var material6 = new THREE.MeshBasicMaterial();
+
+        
+        const cube = new THREE.Mesh(geometry, material);
+        const cube2 = new THREE.Mesh(geometry2, material2);
+        const cube3 = new THREE.Mesh(geometry2, material3);
+        const cube4 = new THREE.Mesh(geometry2, material4);
+        const cube5 = new THREE.Mesh(geometry2, material5);
+        const cube6 = new THREE.Mesh(geometry2, material6);
+
+        scene.add(cube); //agregando el cubo a la escena
+        cube.position.z = -5;
+        
+        scene.add(cube2);
+        cube2.position.x = 5;
+        cube2.position.z = -4;
+
+        scene.add(cube3);
+        cube3.position.x = 25;
+        cube3.position.z = -2;
+
+        scene.add(cube4);
+        cube4.position.y = 35;
+        cube4.position.x = 65;
+        cube4.position.z = -5;
+
+        scene.add(cube5);
+        cube5.position.y = 15;
+        cube5.position.x = 55;
+        cube5.position.z = -7;
+
+        scene.add(cube6);
+        cube6.position.y = 25;
+        cube6.position.z = -8;
+        cube6.position.x = 35;
+
+        window.addEventListener('resize', redimensionar);
+        function redimensionar(){
+            camera.aspect = window.innerWidth/window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.render(scene, camera);
+
+        }
+        //camera.position.z = 5; //poniendo la cámara en una posición diferente a la del cubo
+        renderer.render(scene, camera);//agregando la escena y la cámara al renderer
+
+        //var i = 0;
+        function animate (){
+            requestAnimationFrame(animate); // llamada a una función que ejecuta un bucle
+            /*
+            camera.lookAt(newCamera.position);
+            camera.position.x = Math.cos(i) * 30;
+            camera.position.z = Math.sin(i) * 30;}
+            */
+            cube.rotation.x += 0.009; // rotación del cubo en x 
+            cube.rotation.y += 0.009; // rotación del cubo en y
+
+            cube2.rotation.x += 0.01;
+            cube2.rotation.y += 0.01;
+
+            cube3.rotation.x += 0.01;
+            cube3.rotation.y += 0.01;
+
+            cube4.rotation.x += 0.01;
+            cube4.rotation.y += 0.01;
+
+            cube5.rotation.x += 0.001;
+            cube5.rotation.y += 0.001;
+
+            cube6.rotation.x += 0.01;
+            cube6.rotation.y += 0.01;
+            //i += 0.01;
+            renderer.render(scene, camera); // despliegue de los cubos por cada iteración
+
+        }
+        animate()
+    </script>
+</body>
+</html>
