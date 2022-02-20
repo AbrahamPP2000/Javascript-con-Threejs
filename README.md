@@ -1,4 +1,4 @@
-# Javascript-con-Threejs
+# Trabajo 03: Javascript-con-Threejs
 Práctica de Javascript con Threejs 
 
 Así es como se ve la página:
