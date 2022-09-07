@@ -8,6 +8,7 @@ import {
 	Vector3
 } from "./three.module.js";
 
+esto es un error
 i = 0
 
 // This set of controls performs orbiting, dollying (zooming), and panning.
